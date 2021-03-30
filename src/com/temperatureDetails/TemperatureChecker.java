@@ -1,4 +1,4 @@
-package com.AccountDetails;
+package com.temperatureDetails;
 
 public class TemperatureChecker{
     private final String day;
@@ -16,6 +16,9 @@ public class TemperatureChecker{
     }
 
     public String outputString(){
-        return "output";
+        return "Temperature Details : \n\n"+"Day - " + day + "\n" +
+                "temperature : " + temperature + "\n" +
+                "Speed of Wind : " + speedOfWind +
+                "\nFeels Like temperature : " + feelsLikeTemperature();
     }
 }
