@@ -24,18 +24,18 @@ public class BankAccount {
     }
 
     public static BankAccount open(String name) throws IOException {
-        String id = (int) (Math.random() * 10000)+"";
+        String randomId = (int) (Math.random() * 10000)+"";
         while(true){
-            if(!accountExists(id)){
-                File f = new File(id+".txt");
+            if(!accountExists(randomId)){
+                File f = new File(randomId+".txt");
                 f.createNewFile();
                 FileWriter writer = new FileWriter(f);
                 writer.write(name+"-"+0);
                 writer.close();
 
-                return new BankAccount(id);
+                return new BankAccount(randomId);
             }
-            id = (int) (Math.random() * 10000)+"";
+            randomId = (int) (Math.random() * 10000)+"";
         }
     }
 
@@ -56,9 +56,9 @@ public class BankAccount {
         return details;
     }
 
-    public void processTransaction(TransactionDetails transaction) throws IOException {
+    public void processTransaction(Transaction transaction) throws IOException {
         String[] details = getAccountDetails();
-        String username = details[0];
+        String name = details[0];
         double balance = Double.parseDouble(details[1]);
 
         double updatedBalance = balance + transaction.getAmount();
@@ -70,7 +70,7 @@ public class BankAccount {
 
         File file = new File(this.accountNo+".txt");
         FileWriter writer = new FileWriter(file, false);
-        writer.write(username+"-"+updatedBalance);
+        writer.write(name+"-"+updatedBalance);
         writer.close();
     }
 
@@ -80,10 +80,10 @@ public class BankAccount {
 
 }
 
-class TransactionDetails{
+class Transaction{
     private double amount;
 
-    public TransactionDetails(double amount){
+    public Transaction(double amount){
         this.amount = amount;
     }
 
